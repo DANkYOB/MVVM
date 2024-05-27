@@ -5,16 +5,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mvvm.repository.ProductsRepository
 import com.example.mvvm.repository.model.Product
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FlowFragmentViewModel: ViewModel() {
-
-    private val productsRepository by lazy {
-        ProductsRepository()
-    }
+@HiltViewModel
+class FlowFragmentViewModel @Inject constructor(
+    val productsRepository: ProductsRepository
+): ViewModel() {
+//
+//    @Inject
+//    lateinit var
 
     //flow
     private val channel = Channel<List<Product>>()

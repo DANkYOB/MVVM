@@ -5,14 +5,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mvvm.repository.ProductsRepository
 import com.example.mvvm.repository.model.Product
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeFragmentViewModel: ViewModel() {
+@HiltViewModel
+class HomeFragmentViewModel @Inject constructor(): ViewModel() {
 
-    private val productsRepository by lazy {
-        ProductsRepository()
-    }
+    @Inject
+    lateinit var productsRepository: ProductsRepository
 
     val textLiveData: MutableLiveData<String?> = MutableLiveData()
     val productsLiveData: MutableLiveData<List<Product>> = MutableLiveData()
